@@ -22,9 +22,9 @@ $if[$message[1]==home]
 
 !mm mapstart]
         $elseIf[$getUserVar[projectlist]!=undefined]
-        $sendMessage[You currently have $getUserVar[projectlist] mind maps. Check them out below!
+        $sendMessage[You currently have $getUserVar[projectlistnum] mind maps. Check them out below!
 
-$getUserVar[project1name]]
+$forEach[projects;$getUserVar[projectnames]]]
         $endelseif
     $endIf
 $enedIf
