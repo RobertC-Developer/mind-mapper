@@ -1,0 +1,31 @@
+$if[$message[1]==]
+    $sendMessage[Welcome to the mind mapper tool. Here, you may create mind maps using "bubbles" which extend out into infinity! These are useful for projects, ideas/concepts, or just storing information in a more intuitive way.
+  
+To get started, check out the list of commands with:
+
+!mm commands]
+$endIf
+$if[$message[1]==commands||$message[1]==cmds]
+    $sendMessage[Here is a list of all of the mind-mapping commands:
+
+!mm home
+
+!mm mapstart
+
+!mm travel \[1, 2, 3, etc.\]
+
+!mm edit \[name, 1, 2, 3, etc.\]]
+$endIf
+$if[$message[1]==home]
+    $if[$getUserVar[projectlist]==undefined]
+        $sendMessage[Looks like you haven't started any mind maps yet! To get started, type the following command:
+
+!mm mapstart]
+        $elseIf[$getUserVar[projectlist]!=undefined]
+        $sendMessage[You currently have $getUserVar[projectlist] mind maps. Check them out below!
+
+$getUserVar[project1name]]
+        $endelseif
+    $endIf
+$enedIf
+    
