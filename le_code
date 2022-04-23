@@ -36,6 +36,7 @@ $if[$message[1]==mapcreate||$message[1]==mc]
     $if[$getUserVar[projectlistnum]==undefined]
         $setUserVar[projectlistnum;1]
         $setUserVar[project1;unnamed]
+        $setUserVar[projectnames;$getUserVar[project1]]
         $sendMessaage[You have successfully created your first mind map, congratulations! 
 
 To name this map, use the following command:
@@ -43,6 +44,11 @@ To name this map, use the following command:
 !mm mapname 1 [your_map_name_here,_NO_SPACES_ALLOWED]]
 $endif
 $if[$message[1]==mapname]
-    $setUserVar[project$message[2];$message[3]]
-    
+    $if[$getUserVar[project$message[2]!=undefined]
+        $setUserVar[project$message[2];$message[3]]
+        $sendMessage[You have successfully changed the name of project #$message[2] to $getUserVar[project$message[2]].]
+        $else
+            $sendMessage[ERROR. Project number is $getUserVar[project$message[2]]
+    $endIf
+$endIf
         
