@@ -10,9 +10,13 @@ $if[$message[1]==commands||$message[1]==cmds]
 
 !mm home
 
-!mm mapstart
+!mm mapcreate
 
-!mm travel \[1, 2, 3, etc.\]
+!mm mapdelete
+
+!mm mapname
+
+!mm maptravel \[back, 1, 2, 3, etc.\]
 
 !mm edit \[name, 1, 2, 3, etc.\]]
 $endIf
@@ -28,4 +32,17 @@ $forEach[projects;$getUserVar[projectnames]]]
         $endelseif
     $endIf
 $enedIf
+$if[$message[1]==mapcreate||$message[1]==mc]
+    $if[$getUserVar[projectlistnum]==undefined]
+        $setUserVar[projectlistnum;1]
+        $setUserVar[project1;unnamed]
+        $sendMessaage[You have successfully created your first mind map, congratulations! 
+
+To name this map, use the following command:
+
+!mm mapname 1 [your_map_name_here,_NO_SPACES_ALLOWED]]
+$endif
+$if[$message[1]==mapname]
+    $setUserVar[project$message[2];$message[3]]
     
+        
