@@ -41,7 +41,18 @@ $if[$message[1]==mapcreate||$message[1]==mc]
 
 To name this map, use the following command:
 
-!mm mapname 1 [your_map_name_here,_NO_SPACES_ALLOWED]]
+!mm mapname 1 \[your_map_name_here,_NO_SPACES_ALLOWED_&_remove_brackets\]]
+        $elseIf[$getUserVar[projectlistnum]!=undefined]
+            $setUserVar[projectlistnum;$sum[$getUserVar[projectlistnum];1]]
+            $setUserVar[project$getUserVar[projectlistnum];unnamed]
+            $setUserVar[projectnames;$getUserVar[projectnames] $getUserVar[project$getUserVar[projectlistnum]]]
+            $sendMessage[You have successfully created your #$getUserVar[projectlistnum] project!
+            
+To name this map, use the following command:
+
+!mm mapname $getUserVar[projectlistnum] \[your_map_name_here,_NO_SPACES_ALLOWED_&_remove_brackets\]]
+        $endelseIf
+    $endIf
 $endif
 $if[$message[1]==mapname]
     $if[$getUserVar[project$message[2]!=undefined]
