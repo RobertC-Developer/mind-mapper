@@ -31,7 +31,7 @@ $if[$message[1]==home]
 $forEach[projects;$getUserVar[projectnames]]]
         $endelseif
     $endIf
-$enedIf
+$endIf
 $if[$message[1]==mapcreate||$message[1]==mc]
     $if[$getUserVar[projectlistnum]==undefined]
         $setUserVar[projectlistnum;1]
