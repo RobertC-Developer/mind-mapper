@@ -1,34 +1,34 @@
 $if[$message[1]==]
     $sendMessage[Welcome to the mind mapper tool. Here, you may create mind maps using "bubbles" which extend out into infinity! These are useful for projects, ideas/concepts, or just storing information in a more intuitive way.
   
-To get started, check out the list of commands with:
+To get started, check out the list of commands with#COLON#
 
 !mm commands]
 $endIf
 $if[$message[1]==commands||$message[1]==cmds]
-    $sendMessage[Here is a list of all of the mind-mapping commands:
+    $sendMessage[{description:Here is a list of all of the mind-mapping commands#COLON#
 
-!mm home
+`!mm home`
 
-!mm mapcreate
+`!mm mapcreate`
 
-!mm mapdelete
+`!mm mapdelete`
 
-!mm mapname
+`!mm mapname`
 
-!mm maptravel \[back, 1, 2, 3, etc.\]
+`!mm maptravel #LEFT#back, 1, 2, 3, etc.#RIGHT#`
 
-!mm edit \[name, 1, 2, 3, etc.\]]
+`!mm edit #LEFT#name, 1, 2, 3, etc.#RIGHT#`}]
 $endIf
 $if[$message[1]==home]
     $if[$getUserVar[projectlist]==undefined]
-        $sendMessage[Looks like you haven't started any mind maps yet! To get started, type the following command:
+        $sendMessage[Looks like you haven't started any mind maps yet! To get started, type the following command#COLON#
 
-!mm mapstart]
+`!mm mapstart`]
         $elseIf[$getUserVar[projectlist]!=undefined]
         $sendMessage[You currently have $getUserVar[projectlistnum] mind maps. Check them out below!
 
-$forEach[projects;$getUserVar[projectnames]]]
+$forEach[projects;$getUserVar[projectnames]]] $endForEach
         $endelseif
     $endIf
 $endIf
@@ -39,27 +39,26 @@ $if[$message[1]==mapcreate||$message[1]==mc]
         $setUserVar[projectnames;$getUserVar[project1]]
         $sendMessaage[You have successfully created your first mind map, congratulations! 
 
-To name this map, use the following command:
+To name this map, use the following command#COLON#
 
-!mm mapname 1 \[your_map_name_here,_NO_SPACES_ALLOWED_&_remove_brackets\]]
+!mm mapname 1 #LEFT#your_map_name_here,_NO_SPACES_ALLOWED_&_remove_brackets#RIGHT#]
         $elseIf[$getUserVar[projectlistnum]!=undefined]
             $setUserVar[projectlistnum;$sum[$getUserVar[projectlistnum];1]]
             $setUserVar[project$getUserVar[projectlistnum];unnamed]
             $setUserVar[projectnames;$getUserVar[projectnames] $getUserVar[project$getUserVar[projectlistnum]]]
             $sendMessage[You have successfully created your #$getUserVar[projectlistnum] project!
             
-To name this map, use the following command:
+To name this map, use the following command#COLON#
 
-!mm mapname $getUserVar[projectlistnum] \[your_map_name_here,_NO_SPACES_ALLOWED_&_remove_brackets\]]
+!mm mapname $getUserVar[projectlistnum] #LEFT#your_map_name_here,_NO_SPACES_ALLOWED_&_remove_brackets#RIGHT#]
         $endelseIf
     $endIf
 $endif
 $if[$message[1]==mapname]
-    $if[$getUserVar[project$message[2]!=undefined]
+    $if[$getUserVar[project$message[2]]!=undefined]
         $setUserVar[project$message[2];$message[3]]
         $sendMessage[You have successfully changed the name of project #$message[2] to $getUserVar[project$message[2]].]
         $else
-            $sendMessage[ERROR. Project number is $getUserVar[project$message[2]]
+            $sendMessage[ERROR. Project number is $getUserVar[project$message[2]]]
     $endIf
 $endIf
-        
